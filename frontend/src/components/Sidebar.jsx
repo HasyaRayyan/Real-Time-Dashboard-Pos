@@ -33,35 +33,35 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 bg-slate-900 border-r border-slate-800 text-slate-100 flex flex-col h-screen sticky top-0">
+    <aside className="w-64 bg-slate-950 border-r border-slate-900 text-slate-100 flex flex-col h-screen sticky top-0 z-20 flex-shrink-0">
       {/* Brand Header */}
-      <div className="p-6 border-b border-slate-800 flex items-center space-x-3">
-        <div className="bg-indigo-600 p-2 rounded-lg text-white">
-          <Store className="h-6 w-6" />
+      <div className="p-6 border-b border-slate-900/60 flex items-center space-x-3">
+        <div className="bg-emerald-600 p-2.5 rounded-xl text-white shadow-lg shadow-emerald-600/25">
+          <Store className="h-5.5 w-5.5" />
         </div>
         <div>
-          <h1 className="font-bold text-lg leading-none text-indigo-400">Rayyan POS</h1>
-          <span className="text-xs text-slate-500 font-medium">Real-Time System</span>
+          <h1 className="font-extrabold text-base tracking-tight text-white">Rayyan POS</h1>
+          <span className="text-[10px] text-emerald-500 font-bold uppercase tracking-wider">Emerald Edition</span>
         </div>
       </div>
 
       {/* User Session Info */}
-      <div className="px-6 py-4 border-b border-slate-800 bg-slate-950/40 flex items-center space-x-3">
-        <div className="bg-slate-800 h-9 w-9 rounded-full flex items-center justify-center text-indigo-400 border border-slate-700">
+      <div className="px-6 py-4 border-b border-slate-900/60 bg-slate-900/20 flex items-center space-x-3">
+        <div className="bg-slate-900 h-9 w-9 rounded-xl flex items-center justify-center text-emerald-500 border border-slate-800">
           <UserIcon className="h-5 w-5" />
         </div>
         <div className="overflow-hidden">
-          <p className="text-sm font-semibold truncate leading-tight">{user?.name}</p>
-          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 mt-1 inline-block rounded bg-indigo-900/40 text-indigo-300 border border-indigo-800/50">
+          <p className="text-sm font-semibold truncate leading-tight text-slate-200">{user?.name}</p>
+          <span className="text-[9px] uppercase font-extrabold tracking-wider px-2 py-0.5 mt-1.5 inline-block rounded bg-emerald-950/40 text-emerald-400 border border-emerald-900/30">
             {user?.role}
           </span>
         </div>
       </div>
 
       {/* Nav Menu */}
-      <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
         {isAdmin && (
-          <div>
+          <div className="mb-6">
             <span className="px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-2">
               Menu Admin
             </span>
@@ -73,14 +73,14 @@ const Sidebar = () => {
                   to={link.to}
                   end={link.to === '/admin'}
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                    `flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
                       isActive
-                        ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/10'
-                        : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/10'
+                        : 'text-slate-400 hover:bg-slate-900/60 hover:text-slate-200'
                     }`
                   }
                 >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
+                  <Icon className="h-4.5 w-4.5 flex-shrink-0" />
                   <span>{link.label}</span>
                 </NavLink>
               );
@@ -88,7 +88,7 @@ const Sidebar = () => {
           </div>
         )}
 
-        <div className={isAdmin ? 'mt-6' : ''}>
+        <div>
           <span className="px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-2">
             Menu Kasir
           </span>
@@ -100,14 +100,14 @@ const Sidebar = () => {
                 to={link.to}
                 end={link.to === '/cashier'}
                 className={({ isActive }) =>
-                  `flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                  `flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
                     isActive
-                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/10'
-                      : 'text-slate-400 hover:bg-slate-800/60 hover:text-slate-200'
+                      ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/10'
+                      : 'text-slate-400 hover:bg-slate-900/60 hover:text-slate-200'
                   }`
                 }
               >
-                <Icon className="h-5 w-5 flex-shrink-0" />
+                <Icon className="h-4.5 w-4.5 flex-shrink-0" />
                 <span>{link.label}</span>
               </NavLink>
             );
@@ -116,12 +116,12 @@ const Sidebar = () => {
       </nav>
 
       {/* Logout Footer */}
-      <div className="p-4 border-t border-slate-800">
+      <div className="p-4 border-t border-slate-900/60">
         <button
           onClick={handleLogout}
-          className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium text-rose-400 hover:bg-rose-950/20 hover:text-rose-300 transition-all border border-transparent hover:border-rose-900/30"
+          className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-rose-400 hover:bg-rose-950/20 hover:text-rose-300 transition-all border border-transparent hover:border-rose-950/30"
         >
-          <LogOut className="h-5 w-5 flex-shrink-0" />
+          <LogOut className="h-4.5 w-4.5 flex-shrink-0" />
           <span>Keluar</span>
         </button>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/api';
 import Sidebar from '../../components/Sidebar';
-import { Plus, Edit2, Trash2, Search, X, Loader2, AlertCircle } from 'lucide-react';
+import { Plus, Edit2, Trash2, Search, X, Loader2, AlertCircle, FolderOpen } from 'lucide-react';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
@@ -99,7 +99,7 @@ const CategoryList = () => {
   );
 
   return (
-    <div className="flex h-screen bg-slate-950 text-slate-100 overflow-hidden">
+    <div className="flex h-screen bg-slate-50 text-slate-900 overflow-hidden">
       <Sidebar />
       
       <main className="flex-1 overflow-y-auto p-8">
@@ -107,13 +107,13 @@ const CategoryList = () => {
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight text-white">Kelola Kategori</h1>
-              <p className="text-slate-400 text-sm mt-1">Kelompokkan produk POS Anda agar mudah disaring</p>
+              <h1 className="text-3xl font-black text-slate-900 tracking-tight">Kategori Produk</h1>
+              <p className="text-slate-500 text-sm mt-1.5 font-medium">Kelompokkan katalog produk Anda untuk pencarian yang lebih cepat</p>
             </div>
             
             <button
               onClick={handleOpenAdd}
-              className="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center space-x-2 text-sm shadow-md shadow-indigo-600/10 transition-all self-start md:self-auto"
+              className="bg-emerald-600 hover:bg-emerald-555 active:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 text-sm shadow-md shadow-emerald-600/10 transition-all self-start md:self-auto"
             >
               <Plus className="h-4.5 w-4.5" />
               <span>Tambah Kategori</span>
@@ -121,69 +121,69 @@ const CategoryList = () => {
           </div>
 
           {/* Search bar & statistics */}
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 mb-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.01)]">
             <div className="relative w-full md:max-w-xs">
-              <Search className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-500" />
+              <Search className="absolute left-3 top-2.5 h-4.5 w-4.5 text-slate-400" />
               <input
                 type="text"
                 placeholder="Cari kategori..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 pl-10 pr-4 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+                className="w-full bg-slate-55 border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all font-medium"
               />
             </div>
-            <div className="text-slate-400 text-xs font-semibold self-end md:self-auto uppercase tracking-wider">
+            <div className="text-slate-400 text-xs font-bold uppercase tracking-wider">
               Total: {categories.length} Kategori
             </div>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="bg-rose-500/10 border border-rose-500/30 text-rose-400 p-4 rounded-xl flex items-center space-x-3 mb-6">
+            <div className="bg-rose-50 border border-rose-200 text-rose-600 p-4 rounded-xl flex items-center space-x-3 mb-6">
               <AlertCircle className="h-5 w-5 flex-shrink-0" />
-              <p className="text-sm font-medium">{error}</p>
+              <p className="text-sm font-semibold">{error}</p>
             </div>
           )}
 
           {/* Categories Grid/Table */}
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-20 text-slate-500">
-              <Loader2 className="h-10 w-10 animate-spin text-indigo-500 mb-3" />
-              <p className="text-sm">Memuat data kategori...</p>
+            <div className="flex flex-col items-center justify-center py-20 text-slate-450">
+              <Loader2 className="h-10 w-10 animate-spin text-emerald-600 mb-3" />
+              <p className="text-sm font-semibold text-slate-500">Memuat kategori...</p>
             </div>
           ) : filteredCategories.length === 0 ? (
-            <div className="bg-slate-900 border border-slate-800/80 rounded-xl p-16 text-center text-slate-500">
-              <FolderOpen className="h-12 w-12 mx-auto mb-3 text-slate-700" />
-              <p className="font-semibold text-slate-400">Tidak ada kategori ditemukan</p>
-              <p className="text-xs mt-1">Silakan tambahkan kategori baru atau ubah kata kunci pencarian Anda</p>
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-16 text-center text-slate-500 shadow-[0_8px_30px_rgb(0,0,0,0.01)]">
+              <FolderOpen className="h-12 w-12 mx-auto mb-3 text-slate-300" />
+              <p className="font-bold text-slate-800 text-sm">Tidak ada kategori ditemukan</p>
+              <p className="text-xs text-slate-400 mt-1">Silakan tambahkan kategori baru ke sistem POS Anda.</p>
             </div>
           ) : (
-            <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg">
+            <div className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.01)]">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-950 border-b border-slate-800 text-slate-400 text-xs font-bold uppercase tracking-wider">
+                  <tr className="bg-slate-50 border-b border-slate-250/80 text-slate-500 text-xs font-bold uppercase tracking-wider">
                     <th className="py-4 px-6">Nama Kategori</th>
-                    <th className="py-4 px-6">Slug (URL Friendly)</th>
+                    <th className="py-4 px-6">Slug URL</th>
                     <th className="py-4 px-6 text-right">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800 text-sm">
+                <tbody className="divide-y divide-slate-100 text-sm font-medium">
                   {filteredCategories.map((category) => (
-                    <tr key={category.id} className="hover:bg-slate-800/20 transition-all">
-                      <td className="py-4 px-6 font-semibold text-white">{category.name}</td>
+                    <tr key={category.id} className="hover:bg-slate-50/50 transition-all">
+                      <td className="py-4 px-6 font-extrabold text-slate-900">{category.name}</td>
                       <td className="py-4 px-6 text-slate-400 font-mono text-xs">{category.slug}</td>
                       <td className="py-4 px-6 text-right">
                         <div className="flex items-center justify-end space-x-2">
                           <button
                             onClick={() => handleOpenEdit(category)}
-                            className="p-1.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-indigo-400 hover:text-indigo-300 rounded-lg transition-all"
-                            title="Edit"
+                            className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-emerald-600 hover:text-emerald-700 rounded-xl transition-all"
+                            title="Ubah"
                           >
                             <Edit2 className="h-4 w-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(category.id)}
-                            className="p-1.5 bg-slate-950 hover:bg-rose-950/20 border border-slate-800 hover:border-rose-900/30 text-rose-400 hover:text-rose-300 rounded-lg transition-all"
+                            className="p-2 bg-slate-50 hover:bg-rose-50 border border-slate-200 text-rose-600 hover:text-rose-700 rounded-xl transition-all"
                             title="Hapus"
                           >
                             <Trash2 className="h-4 w-4" />
@@ -201,58 +201,58 @@ const CategoryList = () => {
 
       {/* Add/Edit Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-md shadow-2xl overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/40">
-              <h2 className="font-bold text-white">
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fadeIn">
+          <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-md shadow-2xl overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
+              <h2 className="font-extrabold text-slate-900">
                 {modalMode === 'add' ? 'Tambah Kategori Baru' : 'Ubah Nama Kategori'}
               </h2>
               <button
                 onClick={() => setShowModal(false)}
-                className="text-slate-500 hover:text-slate-300 transition-colors"
+                className="text-slate-400 hover:text-slate-600 transition-colors"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
             
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="p-6 space-y-4 text-slate-800">
               {modalError && (
-                <div className="bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs p-3 rounded-lg font-medium flex items-center space-x-2">
+                <div className="bg-rose-55 border border-rose-200 text-rose-600 text-xs p-3 rounded-xl font-bold flex items-center space-x-2 animate-headShake">
                   <AlertCircle className="h-4 w-4 flex-shrink-0" />
                   <span>{modalError}</span>
                 </div>
               )}
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
                   Nama Kategori
                 </label>
                 <input
                   type="text"
-                  placeholder="Contoh: Makanan Penutup"
+                  placeholder="Contoh: Kopi Dingin"
                   value={categoryName}
                   onChange={(e) => setCategoryName(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2 px-3 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+                  className="w-full bg-slate-55 border border-slate-200 rounded-xl py-2 px-3.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all font-semibold"
                   autoFocus
                 />
               </div>
 
-              <div className="flex items-center justify-end space-x-3 pt-4 border-t border-slate-800/80">
+              <div className="flex items-center justify-end space-x-2.5 pt-4 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-4 py-2 border border-slate-800 text-slate-400 hover:bg-slate-800 rounded-lg text-sm transition-all"
+                  className="px-4 py-2 border border-slate-200 text-slate-500 hover:bg-slate-100 rounded-xl text-sm font-semibold transition-all"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={modalLoading}
-                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-semibold rounded-lg text-sm flex items-center space-x-2 transition-all shadow-md shadow-indigo-600/10"
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-555 active:bg-emerald-700 text-white font-bold rounded-xl text-sm flex items-center space-x-1.5 transition-all shadow-md shadow-emerald-600/10"
                 >
                   {modalLoading ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <Loader2 className="h-4.5 w-4.5 animate-spin" />
                       <span>Menyimpan...</span>
                     </>
                   ) : (
